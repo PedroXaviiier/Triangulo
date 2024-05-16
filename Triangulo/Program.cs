@@ -1,4 +1,8 @@
-﻿namespace Triangulo
+﻿using System.ComponentModel.Design;
+using System.Numerics;
+using System.Reflection.Metadata.Ecma335;
+
+namespace Triangulo
 {
     internal class Program
     {
@@ -17,17 +21,11 @@
                 lado2 = 0;
                 lado3 = 0;
 
-
-                Console.WriteLine("Digite 1 para verificar a figura: \n" +
-                                  "Digite 2 para sair");
-                opcao = Convert.ToInt32(Console.ReadLine());
-
+                opcao = Menu();
 
                 switch (opcao)
                 {
                     case 1:
-
-
                         Console.WriteLine("\ndigite a medida do lado 1: ");
                         lado1 = Convert.ToDouble(Console.ReadLine());
 
@@ -37,7 +35,7 @@
                         Console.WriteLine("\ndigite a medida do lado 3: ");
                         lado3 = Convert.ToDouble(Console.ReadLine());
 
-                        
+
                         break;
 
                     case 2:
@@ -48,36 +46,11 @@
                         break;
                 }
 
-                if(lado1 != 0 && lado2 != 0 && lado3 != 0) 
+                if (lado1 != 0 && lado2 != 0 && lado3 != 0)
                 {
-                    if (lado1 > lado2 + lado3 || lado2 > lado1 + lado3 || lado3 > lado1 + lado2)
-                    {
-
-                        Console.WriteLine("\nNao e um triangulo\n");
-                    }
-
-                    else
-                    {
-                        if (lado1 == lado2 && lado1 == lado3)
-                        {
-                            Console.WriteLine("\nTriangulo equilatero\n");
-                        }
-
-
-                        else if (lado1 != lado2 && lado2 != lado3 && lado1 != lado3)
-                        {
-                            Console.WriteLine("\nTriangulo escaleno\n");
-                        }
-
-
-                        else
-                        {
-                            Console.WriteLine("\nTriangulo isósceles\n");
-                        }
-                    }
+                    string tipo = Verificador(lado1, lado2, lado3);
+                    Console.WriteLine(tipo);
                 }
-
-                
 
             }
             while (opcao != 2);
@@ -88,6 +61,47 @@
 
 
         }
+
+        public static int Menu() 
+        {
+            int opcao;
+            Console.WriteLine("Digite 1 para verificar a figura: \n" +
+                                  "Digite 2 para sair");
+            opcao = Convert.ToInt32(Console.ReadLine());
+
+            return opcao;  
+
+        }
+
+        public static string Verificador(double lado1, double lado2, double lado3)
+        {
+            if (lado1 > lado2 + lado3 || lado2 > lado1 + lado3 || lado3 > lado1 + lado2)
+            {
+                return "\nNao e um triangulo\n";
+            }
+
+            else
+            {
+                if (lado1 == lado2 && lado1 == lado3)
+                {
+                    return "\nTriangulo equilatero\n";
+                }
+
+
+                else if (lado1 != lado2 && lado2 != lado3 && lado1 != lado3)
+                {
+                    return "\nTriangulo escaleno\n";
+                }
+
+
+                else
+                {
+                    return "\nTriangulo isósceles\n";
+                }
+            }
+
+        }
+
     }
     
 
